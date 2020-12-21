@@ -4,12 +4,7 @@
   >
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img
-          class="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-          alt="Workflow"
-        />
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-800 uppercase tracking-tight">
           SAS tax calculator
         </h2>
       </div>
@@ -58,16 +53,23 @@
 
         <div>
           <div>
-            <label for="charges" class="font-medium">Profits</label>
+            <label for="charges" class="font-medium">Profits <span class="text-xs">({{ this.ca }} - ({{ this.salary * 12 }} * 1.81 ) - {{ this.charges}})</span></label>
             <input
-              v-model="profits"
+              :value="profits"
               type="number"
               disabled
               class="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
           </div>
           <div class="mt-4">
-            <label for="charges" class="font-medium">IR (sur {{ 12 * salary }})</label>
+            <label for="charges" class="font-medium">IR <span class="text-xs">(sur {{ 12 * salary }}€)</span></label>
+            <div class="text-xs">
+              <p>moins de 10 064€ : 0%</p>
+              <p>10 064€ à 27 794€ : 14%</p>
+              <p>27 794€ à 74 517€ : 30%</p>
+              <p>74 517€ à 157 806€ : 41%</p>
+              <p>+ de 157 806€ : 45%</p>
+            </div>
             <input
               :value="personalTaxes"
               type="number"
@@ -76,7 +78,7 @@
             />
           </div>
           <div class="mt-4">
-            <label for="charges" class="font-medium">IS</label>
+            <label for="charges" class="font-medium">IS <span class="text-xs">(sur {{ this.ca }}€, 15% jusqu'à 38120 puis 28%)</span></label>
             <input
               v-model="societyTaxes"
               type="number"
@@ -86,7 +88,7 @@
           </div>
           <div class="mt-4">
             <label for="charges" class="font-medium"
-              >Dividendes à prendre</label
+              >Dividendes à prendre <span class="text-xs">(reste des profits)</span></label
             >
             <input
               :value="profits - societyTaxes"
@@ -96,7 +98,7 @@
             />
           </div>
           <div class="mt-4">
-            <label for="charges" class="font-medium">In my pocket</label>
+            <label for="charges" class="font-medium">In my pocket <span class="text-xs">(12 * {{ this.salary }} + (0.7 * {{ profits - societyTaxes }}))</span></label>
             <input
               :value="inMyPocket"
               type="number"
@@ -108,6 +110,11 @@
           <div class="text-3xl mt-4 font-semibold">{{ ((inMyPocket / ca) * 100).toFixed(2) }} %</div>
         </div>
       </form>
+      <div>
+        <NuxtLink class="text-indigo-500 hover:text-indigo-700 hover:underline" to="/micro-entreprise">
+          tax calc pour ME
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -142,6 +149,12 @@ export default {
         return (0.11 * anualSalary).toFixed(2);
       } else if (anualSalary < 73369) {
         return ((0.11 * 25659) + (0.3 * (anualSalary - 25659))).toFixed(2);
+      } else if (anualSalary < 73369) {
+        return ((0.11 * 25659) + (0.3 * (anualSalary - 25659))).toFixed(2);
+      } else if (anualSalary < 157806) {
+        return ((0.11 * 25659) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 73369))).toFixed(2);
+      } else {
+        return ((0.11 * 25659) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 157806)) + (0.45 * (anualSalary - 157806))).toFixed(2);
       }
     },
 

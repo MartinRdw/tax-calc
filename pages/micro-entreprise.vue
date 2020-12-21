@@ -4,12 +4,7 @@
   >
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img
-          class="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-          alt="Workflow"
-        />
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-800 uppercase tracking-tight">
           ME tax calculator
         </h2>
       </div>
@@ -43,7 +38,14 @@
             />
           </div>
           <div class="mt-4">
-            <label for="charges" class="font-medium">IR</label>
+            <label for="charges" class="font-medium">IR <span class="text-xs">(sur {{ ca - societyTaxes }}€ - abattement de 34%)</span></label>
+            <div class="text-xs">
+              <p>moins de 10 064€ : 0%</p>
+              <p>10 064€ à 27 794€ : 14%</p>
+              <p>27 794€ à 74 517€ : 30%</p>
+              <p>74 517€ à 157 806€ : 41%</p>
+              <p>+ de 157 806€ : 45%</p>
+            </div>
             <input
               :value="personalTaxes"
               type="number"
@@ -64,6 +66,11 @@
           <div class="text-3xl mt-4 font-semibold">{{ ((inMyPocket / ca) * 100).toFixed(2) }} %</div>
         </div>
       </form>
+      <div>
+        <NuxtLink class="text-indigo-500 hover:text-indigo-700 hover:underline" to="/">
+          tax calc pour SAS
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
