@@ -95,7 +95,7 @@ export default {
       } else if (anualSalary < 25710) {
         return (0.11 * anualSalary - 10084).toFixed(2);
       } else if (anualSalary < 73369) {
-        return ((0.11 * 25710 - 10084) + (0.3 * (anualSalary - 25710 - 10084))).toFixed(2);
+        return ((0.11 * (25710 - 10084)) + (0.3 * (anualSalary - 25710 - 10084))).toFixed(2);
       }
     },
 
