@@ -89,7 +89,7 @@ export default {
     },
 
     personalTaxes() {
-      const anualSalary = this.ca * 0.78;
+      const anualSalary = this.ca * 0.66;
       if (anualSalary < 10065) {
         return 0
       } else if (anualSalary < 25659) {
