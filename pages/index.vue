@@ -148,13 +148,13 @@ export default {
       } else if (anualSalary < 25659) {
         return (0.11 * anualSalary).toFixed(2);
       } else if (anualSalary < 73369) {
-        return ((0.11 * 25659) + (0.3 * (anualSalary - 25659))).toFixed(2);
+        return ((0.11 * (25710 - 10084)) + (0.3 * (anualSalary - 25659))).toFixed(2);
       } else if (anualSalary < 73369) {
-        return ((0.11 * 25659) + (0.3 * (anualSalary - 25659))).toFixed(2);
+        return ((0.11 * (25710 - 10084)) + (0.3 * (anualSalary - 25659))).toFixed(2);
       } else if (anualSalary < 157806) {
-        return ((0.11 * 25659) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 73369))).toFixed(2);
+        return ((0.11 * (25710 - 10084)) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 73369))).toFixed(2);
       } else {
-        return ((0.11 * 25659) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 157806)) + (0.45 * (anualSalary - 157806))).toFixed(2);
+        return ((0.11 * (25710 - 10084)) + (0.3 * (anualSalary - 73369)) + (0.41 * (anualSalary - 157806)) + (0.45 * (anualSalary - 157806))).toFixed(2);
       }
     },
 
